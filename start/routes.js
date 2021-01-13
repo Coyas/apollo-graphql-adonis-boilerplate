@@ -34,4 +34,4 @@ Route.post(
 
 // Setup the /graphiql route to show the GraphiQL UI
 // a POST endpoint that GraphiQL will make the actual requests to /grahpql
-Route.get("/graphiql", graphiqlAdonis({ endpointURL: "/graphql" }));
+// Route.get("/graphiql", graphiqlAdonis({ endpointURL: "/graphql" }));

@@ -1,6 +1,7 @@
 const { makeExecutableSchema } = require("graphql-tools");
 
 const User = use("App/Models/User");
+const Categoria = use("App/Models/Categoria");
 
 const typeDefs = `
     type User {
@@ -8,6 +9,11 @@ const typeDefs = `
         username: String
         email: String
         password: String
+    }
+
+    type Categoria {
+      id: ID!
+      nome: String!
     }
 
     # retorno para login
@@ -20,11 +26,13 @@ const typeDefs = `
     type Query {
         allUsers: [User]
         getUser(email: String!): User
+        getCategorias: [Categoria!]!
     }
 
     type Mutation {
         createUser (username: String!, email: String!, password: String!): User
         login (email: String!, password: String!): authData
+        createCategoria (nome: String!): Categoria
     }
 
   # we need to tell the server which types represent the root query
@@ -52,6 +60,10 @@ const resolvers = {
         throw new Error(error);
       }
     },
+    async getCategorias() {
+      const categ = await Categoria.all();
+      return categ.toJSON();
+    },
   },
   Mutation: {
     async createUser(parent, { username, email, password }, { auth }, info) {
@@ -68,7 +80,6 @@ const resolvers = {
       }
     },
     async login(parent, { email, password }, { auth }, info) {
-      console.log(email);
       try {
         const user = await User.findBy("email", email);
         console.log(user.toJSON());
@@ -78,6 +89,16 @@ const resolvers = {
 
         return await auth.attempt(email, password);
         // return await auth.withRefreshToken().attempt(email, password);
+      } catch (error) {
+        throw new Error(error);
+      }
+    },
+    async createCategoria(parent, { nome }, { auth }, info) {
+      try {
+        await auth.check(); // so permitir users logado
+        const categ = await Categoria.create({ nome });
+        if (!categ) return null;
+        return categ.toJSON();
       } catch (error) {
         throw new Error(error);
       }
