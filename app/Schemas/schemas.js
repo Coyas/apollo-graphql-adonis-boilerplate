@@ -56,7 +56,7 @@ const resolvers = {
   Mutation: {
     async createUser(parent, { username, email, password }, { auth }, info) {
       try {
-        await auth.check();
+        // await auth.check();// so permitir users logado
 
         const user = await User.create({ username, email, password });
 

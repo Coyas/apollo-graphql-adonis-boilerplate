@@ -20,6 +20,10 @@ const MySchema = use("App/Schemas/schemas");
 const Route = use("Route");
 
 // Route.post("/graphql", graphqlAdonis({ schema: MySchema }));
+Route.get("/", () => {
+  return { msg: "KriolStock System" };
+});
+
 Route.post(
   "/graphql",
   graphqlAdonis(({ request, auth }) => ({
