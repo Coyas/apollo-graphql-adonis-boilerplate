@@ -14,14 +14,20 @@
 */
 
 /** @type {typeof import('@adonisjs/framework/src/Route/Manager')} */
+const { graphqlAdonis, graphiqlAdonis } = require("apollo-server-adonis");
+const MySchema = use("App/Schemas/schema");
+
 const Route = use("Route");
 
-Route.get("/", () => {
-  return { greeting: "Hello world in JSON" };
-});
+// Route.post("/graphql", graphqlAdonis({ schema: MySchema }));
+Route.post(
+  "/graphql",
+  graphqlAdonis(({ request, auth }) => ({
+    schema: MySchema,
+    context: { request, auth },
+  }))
+);
 
-Route.get("/terra", () => {
-  return { msg: "Hello world in JSON from terrasystem" };
-});
-
-Route.get("/login", "UserController.index").middleware("auth");
+// Setup the /graphiql route to show the GraphiQL UI
+// a POST endpoint that GraphiQL will make the actual requests to /grahpql
+Route.get("/graphiql", graphiqlAdonis({ endpointURL: "/graphql" }));
