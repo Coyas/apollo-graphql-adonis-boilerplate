@@ -11,7 +11,7 @@ class ProdutosSchema extends Schema {
       table.string("image", 255).notNullable();
       table.string("download_link", 255).notNullable();
       table.integer("categoria_id").references("id").inTable("categorias");
-      // table.integer("fornecedor_id").references("id").inTable("categoria");
+      table.integer("fornecedor_id").references("id").inTable("fornecedores");
       table.timestamps();
     });
   }
