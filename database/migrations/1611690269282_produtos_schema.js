@@ -10,8 +10,8 @@ class ProdutosSchema extends Schema {
       table.string("nome", 50).notNullable();
       table.string("image", 255).notNullable();
       table.string("download_link", 255).notNullable();
-      table.integer("categoria_id").references("id").inTable("categorias");
-      table.integer("fornecedor_id").references("id").inTable("fornecedores");
+      table.integer("categoria_id").references("categorias.id");
+      table.integer("fornecedor_id").references("fornecedores.id");
       table.timestamps();
     });
   }
