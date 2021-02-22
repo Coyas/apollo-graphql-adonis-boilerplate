@@ -7,4 +7,4 @@ type Categoria {
   }
 `;
 
-module.exports = { categoriaType };
+module.exports = categoriaType;
