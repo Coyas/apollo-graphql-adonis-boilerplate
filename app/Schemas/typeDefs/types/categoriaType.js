@@ -1,7 +1,5 @@
-// const { gql } = require("apollo-server");
-
 const categoriaType = `
-type Categoria {
+  type Categoria {
     id: ID!
     nome: String!
   }

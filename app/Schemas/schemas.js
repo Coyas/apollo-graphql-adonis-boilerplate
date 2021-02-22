@@ -22,7 +22,7 @@ const typeDefs = `
         token: String!
         refreshToken: String
     }
-
+ 
     type Produto {
       title: String!
       image: String!
