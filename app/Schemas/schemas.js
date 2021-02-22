@@ -23,10 +23,30 @@ const typeDefs = `
         refreshToken: String
     }
 
+    type Produto {
+      title: String!
+      image: String!
+      download_link: String!
+      fornecedor_id: Fornecedor!
+      categoria_id: Categoria!
+    }
+
+    type Fornecedor {
+      nic: Int
+      nome: String!
+      empresa: String
+      email: String!
+      contacto: Int
+      profissao: String!
+      permitidoVender: Boolean
+      user_id: User!
+    }
+
     type Query {
         allUsers: [User]
         getUser(email: String!): User
         getCategorias: [Categoria!]!
+        getItem(id: ID!): Produto
     }
 
     type Mutation {
@@ -63,6 +83,16 @@ const resolvers = {
     async getCategorias() {
       const categ = await Categoria.all();
       return categ.toJSON();
+    },
+    // funcao para pegar um produto baseado no id retornado
+    async getItem(parent, { id }, { auth }, info) {
+      try {
+        await auth.check();
+
+        return "get item " + id;
+      } catch (error) {
+        throw new Error(error);
+      }
     },
   },
   Mutation: {

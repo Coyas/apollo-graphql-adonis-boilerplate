@@ -13,6 +13,7 @@ class FornecedoresSchema extends Schema {
       table.string("proficao", 50);
       table.string("email").notNullable();
       table.boolean("permitidovender").defaultTo(false);
+      table.integer("user_id").references("users.id").notNullable();
       table.timestamps();
     });
   }
