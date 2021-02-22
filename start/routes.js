@@ -15,7 +15,7 @@
 
 /** @type {typeof import('@adonisjs/framework/src/Route/Manager')} */
 const { graphqlAdonis, graphiqlAdonis } = require("apollo-server-adonis");
-const MySchema = use("App/Schemas/schemas");
+const MySchema = use("App/Schemas");
 
 const Route = use("Route");
 
