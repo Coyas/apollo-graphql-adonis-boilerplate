@@ -125,7 +125,7 @@ const resolvers = {
     },
     async createCategoria(parent, { nome }, { auth }, info) {
       try {
-        await auth.check(); // so permitir users logado
+        // await auth.check(); // so permitir users logado
         const categ = await Categoria.create({ nome });
         if (!categ) return null;
         return categ.toJSON();

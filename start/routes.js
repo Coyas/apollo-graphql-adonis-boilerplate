@@ -17,7 +17,7 @@
 const { graphqlAdonis, graphiqlAdonis } = require("apollo-server-adonis");
 
 // importaçao do schema
-const MySchema = use("App/Schemas");
+const MySchema = use("App/Schemas/schemas");
 
 const Route = use("Route");
 
